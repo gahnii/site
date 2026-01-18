@@ -5,97 +5,192 @@
   <title>dani</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Pixel / cute fonts -->
+  <!--fonts lol -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffe6f0, #fff5fa);
+      font-family: 'Nunito', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #ffffff 50%,
+        #000000 50%,
+        #000000 100%
+      );
+    }
+
+    /* --- splash screen --- */
+    #splash {
+      position: fixed;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Nunito', sans-serif;
-      color: #5c2a3d;
+      background: #000;
+      color: #fff;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 9999;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    /* flip up animation  */
+    .flip-up {
+      transform: rotateX(90deg) translateY(-50%);
+      opacity: 0;
+    }
+
+    /* --- main card content --- */
+    #main {
+      display: none;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card {
-      background: white;
+      background: #ffffff;
       padding: 28px;
-      border-radius: 24px;
       width: 320px;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(255, 170, 200, 0.35);
-      border: 2px solid #ffd1e3;
+      border-radius: 14px;
+      border: 2px solid #000;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
     }
 
-    img {
+    img.profile {
       width: 90px;
       height: 90px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #ffb3d1;
-      margin-bottom: 12px;
+      border: 3px solid #000;
+      margin-bottom: 14px;
     }
 
     h1 {
       font-family: 'Press Start 2P', cursive;
-      font-size: 16px;
-      margin: 10px 0;
-      color: #ff6fae;
+      font-size: 14px;
+      margin: 12px 0;
+      color: #000;
+      letter-spacing: 1px;
     }
 
     p {
-      font-size: 14px;
-      opacity: 0.85;
-      margin-bottom: 18px;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 20px;
     }
 
-    a {
-      display: block;
-      text-decoration: none;
-      background: #ffe1ee;
-      color: #7a2f52;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 999px;
-      font-weight: 600;
-      transition: 0.2s ease;
-      border: 2px solid #ffc1da;
+    /* --- icon links --- */
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
     }
 
-    a:hover {
-      background: #ffb3d1;
-      transform: translateY(-2px);
+    .links a img {
+      width: 40px;   /*  size */
+      height: 40px;
+      transition: transform 0.2s, opacity 0.2s;
+      border-radius: 8px; /* optional rounded corners */
     }
 
-    .sparkle {
-      font-size: 12px;
-      opacity: 0.6;
-      margin-top: 14px;
+    .links a img:hover {
+      transform: scale(1.2);
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-  <div class="card">
 
-    <!-- Replace this image link with a direct image URL (ends in .jpg/.png) -->
-    <img src="https://i.imgur.com/WVEjqra.jpeg" alt="pfp">
+  <!-- splash screen -->
+  <div id="splash">PRESS START</div>
 
-    <h1>dani</h1>
-    <p>
-      chronically online, pokemon enthusiast & currently taking cs + networking.<br>
+  <!-- start sound -->
+  <audio id="startSound" src="pokemon-start.mp3"></audio>
 
-      I love my friends nat, enzo, andrew, mari, irwin, aariz, fuji, kael ♡
-    </p>
+  <!-- background music -->
+  <audio id="bgMusic" src="roi.mp3" loop></audio>
 
-    <a href="https://www.tiktok.com/@dnca1600">TikTok</a>
-    <a href="https://pokemonshowdown.com/users/waitimsogoated">Showdown</a>
-    <a href="https://www.roblox.com/users/2246596615/profile">Roblox</a>
-    <a href="https://open.spotify.com/user/315lttbowr4guh66yl5adv5ley7u">Spotify</a>
+  <!-- main card content -->
+  <div id="main">
+    <div class="card">
+      <img class="profile" src="https://i.imgur.com/WVEjqra.jpeg" alt="pfp">
+      <h1>dani</h1>
+      <p>
+        chronically online, pokemon enthusiast & currently taking cs + networking.<br>
+        I love my friends nat, enzo, andrew, mari, irwin, aariz, fuji, kael ♡
+      </p>
 
-    <div class="sparkle">☆</div>
+      <!-- icon links -->
+      <div class="links">
+        <a href="https://www.tiktok.com/@dnca1600" target="_blank">
+          <img src="https://i.imgur.com/hTQmoU3.png" alt="TikTok">
+        </a>
+        <a href="https://pokemonshowdown.com/users/waitimsogoated" target="_blank">
+          <img src="https://i.imgur.com/COqXu8j.png" alt="Showdown">
+        </a>
+        <a href="https://www.roblox.com/users/2246596615/profile" target="_blank">
+          <img src="https://i.imgur.com/mw7x8uo.png" alt="Roblox">
+        </a>
+        <a href="https://open.spotify.com/user/315lttbowr4guh66yl5adv5ley7u" target="_blank">
+          <img src="https://i.imgur.com/oZkAFWR.png" alt="Spotify">
+        </a>
+      </div>
+
+    </div>
   </div>
+
+  <script>
+    const splash = document.getElementById('splash');
+    const main = document.getElementById('main');
+    const startSound = document.getElementById('startSound');
+    const bgMusic = document.getElementById('bgMusic');
+
+    function fadeInAudio(audio, duration = 2000) {
+      // start at volume 0
+      audio.volume = 0;
+      audio.play();
+      const step = 0.05; // how much to increase each interval
+      const intervalTime = duration / (1 / step); // calculate interval timing
+      const fadeInterval = setInterval(() => {
+        if (audio.volume < 1) {
+          audio.volume = Math.min(audio.volume + step, 1);
+        } else {
+          clearInterval(fadeInterval);
+        }
+      }, intervalTime);
+    }
+
+    function startGame() {
+      // play start sound immediately
+      startSound.play();
+
+      // add flipup anim
+      splash.classList.add('flip-up');
+
+      // show main after anim ends (0.8s)
+      setTimeout(() => {
+        splash.style.display = 'none';
+        main.style.display = 'flex';
+        // fade in bg music
+        fadeInAudio(bgMusic, 3000); // fade in over 3 seconds
+      }, 800);
+
+      // remove event listeners
+      splash.removeEventListener('click', startGame);
+      document.removeEventListener('keydown', startGame);
+    }
+
+    splash.addEventListener('click', startGame);
+    document.addEventListener('keydown', startGame);
+  </script>
+
 </body>
 </html>
