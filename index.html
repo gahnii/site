@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600&display=swap" rel="stylesheet">
 
   <style>
-    /* Body with moving gradient background */
+    /* body with moving gradient background */
     body {
       margin: 0;
       font-family: 'Nunito', sans-serif;
@@ -43,7 +43,7 @@
       100% { transform: translateY(-10px); }
     }
 
-    /* Splash screen */
+    /* splash screen */
     #splash {
       position: fixed;
       inset: 0;
@@ -60,7 +60,7 @@
     }
     .flip-up { transform: rotateX(90deg) translateY(-50%); opacity: 0; }
 
-    /* Main card */
+    /* main card */
     #main {
       display: none;
       height: 100vh;
@@ -86,13 +86,33 @@
     h1 { font-family: 'Press Start 2P', cursive; font-size: 14px; margin: 12px 0; color: #000; letter-spacing: 1px; }
     p { font-size: 13px; color: #333; line-height: 1.5; margin-bottom: 20px; }
 
-    /* Icon links */
+    /* icon links */
     .links { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; }
     .links a img { width: 40px; height: 40px; transition: transform 0.2s, opacity 0.2s; border-radius: 8px; }
     .links a img:hover { transform: scale(1.2); opacity: 0.8; }
 
-    /* Views counter */
+    /* views counter */
     #views { font-size: 11px; color: #555; font-family: 'Nunito', sans-serif; }
+
+    /* Blog button */
+    .blog-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 12px;
+      color: #000;
+      text-decoration: none;
+      border: 2px solid #000;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .blog-link:hover {
+      background: #000;
+      color: #fff;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -132,6 +152,9 @@
         </a>
       </div>
       <div id="views">👀 views: 1006</div>
+
+      <!-- New Blog Button -->
+      <a href="jblog.html" class="blog-link">blog</a>
     </div>
   </div>
 
