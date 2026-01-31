@@ -5,11 +5,9 @@
   <title>dani</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600&display=swap" rel="stylesheet">
 
   <style>
-    /* body with moving gradient background */
     body {
       margin: 0;
       font-family: 'Nunito', sans-serif;
@@ -24,7 +22,6 @@
       100% { background-position: 75% 75%; }
     }
 
-    /* Dragons */
     .dragon {
       position: fixed;
       opacity: 0.35;
@@ -35,15 +32,24 @@
       transition: filter 0.2s ease;
       animation: float 4s ease-in-out infinite alternate;
     }
-    .dragon.reshiram { top: 10%; left: 5%; filter: drop-shadow(0 0 4px rgba(0,0,0,0.6)) contrast(1.5); }
-    .dragon.zekrom   { bottom: 5%; right: 5%; filter: drop-shadow(0 0 4px rgba(255,255,255,0.5)) contrast(1.5); }
+
+    .dragon.reshiram {
+      top: 10%;
+      left: 5%;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.6)) contrast(1.5);
+    }
+
+    .dragon.zekrom {
+      bottom: 5%;
+      right: 5%;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5)) contrast(1.5);
+    }
 
     @keyframes float {
       0% { transform: translateY(0); }
       100% { transform: translateY(-10px); }
     }
 
-    /* splash screen */
     #splash {
       position: fixed;
       inset: 0;
@@ -58,13 +64,15 @@
       z-index: 9999;
       transition: transform 0.8s ease, opacity 0.8s ease;
     }
-    .flip-up { transform: rotateX(90deg) translateY(-50%); opacity: 0; }
 
-    /* main card */
+    .flip-up {
+      transform: rotateX(90deg) translateY(-50%);
+      opacity: 0;
+    }
+
     #main {
       display: none;
       height: 100vh;
-      display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -82,19 +90,54 @@
       margin-bottom: 10px;
     }
 
-    img.profile { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #000; margin-bottom: 14px; }
-    h1 { font-family: 'Press Start 2P', cursive; font-size: 14px; margin: 12px 0; color: #000; letter-spacing: 1px; }
-    p { font-size: 13px; color: #333; line-height: 1.5; margin-bottom: 20px; }
+    img.profile {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #000;
+      margin-bottom: 14px;
+    }
 
-    /* icon links */
-    .links { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; }
-    .links a img { width: 40px; height: 40px; transition: transform 0.2s, opacity 0.2s; border-radius: 8px; }
-    .links a img:hover { transform: scale(1.2); opacity: 0.8; }
+    h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 14px;
+      margin: 12px 0;
+      color: #000;
+      letter-spacing: 1px;
+    }
 
-    /* views counter */
-    #views { font-size: 11px; color: #555; font-family: 'Nunito', sans-serif; }
+    p {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
 
-    /* Blog button */
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .links a img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.2s, opacity 0.2s;
+      border-radius: 8px;
+    }
+
+    .links a img:hover {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+
+    #views {
+      font-size: 11px;
+      color: #555;
+    }
+
     .blog-link {
       display: block;
       text-align: center;
@@ -108,6 +151,7 @@
       border-radius: 8px;
       transition: transform 0.2s, background 0.2s;
     }
+
     .blog-link:hover {
       background: #000;
       color: #fff;
@@ -117,26 +161,23 @@
 </head>
 <body>
 
-  <!-- Dragons -->
   <img class="dragon reshiram" src="rzekrom.gif" alt="reshiram">
   <img class="dragon zekrom" src="reshiram.gif" alt="zekrom">
 
-  <!-- Splash screen -->
   <div id="splash">PRESS START</div>
 
-  <!-- Sounds -->
   <audio id="startSound" src="pokemon-start.mp3"></audio>
   <audio id="bgMusic" src="moongirl.mp3" loop></audio>
 
-  <!-- Main card -->
   <div id="main">
     <div class="card">
-      <img class="profile" src="https://i.imgur.com/WVEjqra.jpeg" alt="pfp">
+      <img class="profile" src="https://i.imgur.com/UbyLbw9.jpeg" alt="pfp">
       <h1>dani</h1>
       <p>
         chronically online, pokemon enthusiast & currently taking cs + networking.<br>
         I love my friends nat, enzo, andrew, mari, irwin, aariz, fuji, aldrin, steve, kael ♡
       </p>
+
       <div class="links">
         <a href="https://www.tiktok.com/@dnca1600" target="_blank">
           <img src="https://i.imgur.com/hTQmoU3.png" alt="TikTok">
@@ -151,9 +192,9 @@
           <img src="https://i.imgur.com/oZkAFWR.png" alt="Spotify">
         </a>
       </div>
+
       <div id="views">👀 views: 1006</div>
 
-      <!-- New Blog Button -->
       <a href="jblog.html" class="blog-link">blog</a>
     </div>
   </div>
@@ -178,11 +219,13 @@
     function startGame() {
       startSound.play();
       splash.classList.add('flip-up');
+
       setTimeout(() => {
         splash.style.display = 'none';
         main.style.display = 'flex';
         fadeInAudio(bgMusic, 3000);
       }, 800);
+
       splash.removeEventListener('click', startGame);
       document.removeEventListener('keydown', startGame);
     }
