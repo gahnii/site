@@ -1,238 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>dani</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>dani trainer card</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Nunito', sans-serif;
-      overflow: hidden;
-      background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #000000 50%, #000000 100%);
-      background-size: 300% 300%;
-      animation: bgShift 8s ease-in-out infinite alternate;
-    }
+<style>
+:root{
+  --teal-1:#1fb6b4;
+  --teal-2:#0a7f86;
+  --pink-1:#ffd0df;
+  --pink-2:#f7a9c6;
+  --ink:#12333a;
+  --card:#ffffff;
+}
 
-    @keyframes bgShift {
-      0% { background-position: 25% 25%; }
-      100% { background-position: 75% 75%; }
-    }
+*{ box-sizing:border-box; }
 
-    .dragon {
-      position: fixed;
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-      image-rendering: pixelated;
-      width: 150px;
-      transition: filter 0.2s ease;
-      animation: float 4s ease-in-out infinite alternate;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:32px 24px;
+  font-family:"Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
+  color:var(--ink);
+  overflow-x:hidden;
+  background: linear-gradient(
+    180deg,
+    #e9fff9 0%,
+    #dffaf6 18%,
+    #bff3ee 42%,
+    #67d7dd 72%,
+    #1aa7b2 100%
+  );
+}
 
-    .dragon.reshiram {
-      top: 10%;
-      left: 5%;
-      filter: drop-shadow(0 0 4px rgba(0,0,0,0.6)) contrast(1.5);
-    }
+/* static water texture */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+}
+body::before{
+  background:
+    radial-gradient(900px 420px at 20% 30%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(700px 360px at 75% 25%, rgba(255,255,255,.22), transparent 55%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,.10) 0px,
+      rgba(255,255,255,.10) 10px,
+      rgba(255,255,255,0) 10px,
+      rgba(255,255,255,0) 34px
+    );
+  mix-blend-mode: soft-light;
+  opacity:.75;
+}
+body::after{
+  background:
+    repeating-radial-gradient(
+      circle at 0% 0%,
+      rgba(255,255,255,.10) 0px,
+      rgba(255,255,255,.10) 7px,
+      rgba(255,255,255,0) 7px,
+      rgba(255,255,255,0) 26px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.16) 0px,
+      rgba(255,255,255,.16) 18px,
+      rgba(255,255,255,0) 18px,
+      rgba(255,255,255,0) 56px
+    );
+  background-size: 380px 380px, 220% 220%;
+  background-position: 0 0, 0% 0%;
+  opacity:.45;
+}
 
-    .dragon.zekrom {
-      bottom: 5%;
-      right: 5%;
-      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5)) contrast(1.5);
-    }
+/* scene layer (wingulls + wishiwashi) */
+.scene-layer{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
-    }
+.scene-wingulls{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(420px, 92vw);
+  height:110px;
+  opacity:.95;
+}
 
-    #splash {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      color: #fff;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 9999;
-      transition: transform 0.8s ease, opacity 0.8s ease;
-    }
+.wingull{
+  position:absolute;
+  width:52px;
+  height:52px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.12));
+  transform-origin:center;
+}
 
-    .flip-up {
-      transform: rotateX(90deg) translateY(-50%);
-      opacity: 0;
-    }
+.wingull.w1{ left:48%; top:18px; transform:translateX(-50%) rotate(-8deg)  scale(1.05); opacity:1; }
+.wingull.w2{ left:34%; top:34px; transform:rotate(10deg)  scale(.95);     opacity:.95; }
+.wingull.w3{ left:62%; top:38px; transform:rotate(-4deg)  scale(.9);      opacity:.9; }
+.wingull.w4{ left:22%; top:14px; transform:rotate(14deg)  scale(.85);     opacity:.85; }
+.wingull.w5{ left:74%; top:16px; transform:rotate(-12deg) scale(.85);     opacity:.85; }
 
-    #main {
-      display: none;
-      height: 100vh;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 2;
-    }
+@keyframes flapA { to { transform: translateY(-2px) rotate(-6deg) scale(1.05); } }
+@keyframes flapB { to { transform: translateY(2px)  rotate(12deg) scale(.95); } }
+@keyframes flapC { to { transform: translateY(-1px) rotate(-2deg) scale(.9); } }
 
-    .card {
-      background: #fff;
-      padding: 28px;
-      width: 320px;
-      text-align: center;
-      border-radius: 14px;
-      border: 2px solid #000;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
-      margin-bottom: 10px;
-    }
+.wingull.w1{ animation: flapA 2.6s ease-in-out infinite alternate; }
+.wingull.w2{ animation: flapB 3.2s ease-in-out infinite alternate; }
+.wingull.w3{ animation: flapC 2.9s ease-in-out infinite alternate; }
+.wingull.w4{ animation: flapB 3.6s ease-in-out infinite alternate; }
+.wingull.w5{ animation: flapC 3.0s ease-in-out infinite alternate; }
 
-    img.profile {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #000;
-      margin-bottom: 14px;
-    }
+.scene-wishiwashi{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:22px;
+  width:min(1100px, 98vw);
+  height:220px;
+  opacity:.98;
+}
 
-    h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 14px;
-      margin: 12px 0;
-      color: #000;
-      letter-spacing: 1px;
-    }
+.wishi{
+  position:absolute;
+  width:34px;
+  height:34px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.12));
+  opacity:.9;
+  transform-origin:center;
+}
 
-    p {
-      font-size: 13px;
-      color: #333;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
+@keyframes bobA { to { transform: translateY(-4px) rotate(2deg); } }
+@keyframes bobB { to { transform: translateY(3px) rotate(-2deg); } }
+@keyframes bobC { to { transform: translateY(-2px) rotate(1deg); } }
 
-    .links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 10px;
-    }
+.wishi.a{ animation: bobA 6s ease-in-out infinite alternate; }
+.wishi.b{ animation: bobB 7.5s ease-in-out infinite alternate; }
+.wishi.c{ animation: bobC 6.8s ease-in-out infinite alternate; }
 
-    .links a img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.2s, opacity 0.2s;
-      border-radius: 8px;
-    }
+/* card */
+.trainer-card{
+  width:min(900px, 96vw);
+  border-radius:28px;
+  padding:14px;
+  background:linear-gradient(180deg, var(--teal-1), var(--teal-2));
+  box-shadow:0 18px 60px rgba(0,0,0,.22);
+}
+.inner{
+  border-radius:22px;
+  overflow:hidden;
+  background:var(--card);
+  box-shadow: inset 0 0 0 2px rgba(11,109,115,.35);
+}
 
-    .links a img:hover {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
+.top{
+  padding:16px;
+  position:relative;
+  background:
+    radial-gradient(700px 260px at 60% 20%, rgba(255,255,255,.72), transparent 60%),
+    radial-gradient(520px 250px at 25% 70%, rgba(31,182,180,.12), transparent 60%),
+    linear-gradient(90deg, rgba(223,247,239,.98), rgba(223,247,239,.80)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(191,232,214,.38) 0px,
+      rgba(191,232,214,.38) 62px,
+      rgba(223,247,239,0) 62px,
+      rgba(223,247,239,0) 124px
+    );
+}
+.bottom{
+  padding:14px 16px;
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.22)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.28) 0px,
+      rgba(255,255,255,.28) 14px,
+      rgba(255,255,255,0) 14px,
+      rgba(255,255,255,0) 28px
+    ),
+    linear-gradient(90deg, var(--pink-1), var(--pink-2));
+}
 
-    #views {
-      font-size: 11px;
-      color: #555;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:128px 1fr;
+  gap:14px;
+  position:relative;
+  z-index:3;
+}
+.portrait{
+  width:128px;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  background:linear-gradient(135deg, rgba(255,255,255,.85), rgba(255,255,255,.35));
+  border:3px solid rgba(11,109,115,.45);
+  box-shadow:0 10px 22px rgba(0,0,0,.12);
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+.portrait img{ width:100%; height:100%; object-fit:cover; }
 
-    .blog-link {
-      display: block;
-      text-align: center;
-      margin-top: 15px;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 12px;
-      color: #000;
-      text-decoration: none;
-      border: 2px solid #000;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: transform 0.2s, background 0.2s;
-    }
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 22px;
+}
+.row{ display:flex; justify-content:space-between; font-size:15px; }
+.label{ font-weight:800; opacity:.9; }
+.value{ font-weight:800; }
 
-    .blog-link:hover {
-      background: #000;
-      color: #fff;
-      transform: scale(1.05);
-    }
-  </style>
+.divider{
+  height:2px;
+  margin:14px 0 0;
+  background:linear-gradient(90deg, transparent, rgba(11,109,115,.35), transparent);
+}
+
+.footer{
+  padding:10px 14px;
+  background:linear-gradient(180deg, #1aa7a6, #0a6c74);
+  color:#eaffff;
+  font-weight:800;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+.btn{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.25);
+  font-size:13px;
+}
+
+/* motifs inside card */
+.motif-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+.motif{
+  position:absolute;
+  image-rendering: pixelated;
+  user-select:none;
+}
+
+/* palms (static) */
+.motif.palm{
+  mix-blend-mode: multiply;
+  filter: saturate(1.15) contrast(1.05);
+}
+.motifpalm-2{ right:-26px; top:10px; width:140px; opacity:.22; transform: scaleX(-1) rotate(10deg); }
+.motifpalm-3{ left:120px; bottom:-30px; width:120px; opacity:.20; transform: rotate(6deg); }
+.motifpalm-4{ right:160px; top:-18px; width:95px; opacity:.16; transform: rotate(-12deg); }
+
+/* leaves (static + visible) */
+.motif.leaf{
+  z-index:2;
+  mix-blend-mode: normal;
+  opacity:.55;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.18)) saturate(1.15) contrast(1.1);
+}
+.motifleaf-1{ left:18px; top:16px; width:34px; transform: rotate(-14deg); }
+.motifleaf-2{ right:64px; top:46px; width:28px; transform: rotate(16deg); }
+.motifleaf-3{ left:230px; bottom:8px; width:30px; transform: rotate(10deg); }
+
+/* bottom icons */
+.motif.icon{
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.18)) saturate(1.15) contrast(1.1);
+  opacity:.55;
+}
+.motificon-sunmoon{ left:10px; top:10px; width:34px; transform: rotate(-6deg); }
+.motificon-burningshadows{ right:10px; bottom:10px; width:34px; transform: rotate(7deg); }
+
+/* keep text off the icons */
+.bottom .stats{
+  position:relative;
+  z-index:2;
+  padding-left:52px;
+  padding-right:52px;
+}
+
+/* mobile */
+@media (max-width:560px){
+  .grid{ grid-template-columns:96px 1fr; }
+  .portrait{ width:96px; }
+  .stats{ grid-template-columns:1fr; }
+
+  .scene-wishiwashi{ height:180px; }
+  .wishi{ width:28px; height:28px; }
+
+  .scene-wingulls{ width:min(340px, 92vw); height:96px; }
+  .wingull{ width:44px; height:44px; }
+
+  .motifpalm-2{ width:115px; }
+  .motifpalm-3{ width:100px; }
+  .motifpalm-4{ width:80px; }
+
+  .motificon-sunmoon,
+  .motificon-burningshadows{ width:30px; }
+
+  .bottom .stats{
+    padding-left:46px;
+    padding-right:46px;
+  }
+
+  .motifleaf-1{ width:30px; }
+  .motifleaf-2{ width:26px; }
+  .motifleaf-3{ width:28px; }
+}
+</style>
 </head>
+
 <body>
 
-  <img class="dragon reshiram" src="rzekrom.gif" alt="reshiram">
-  <img class="dragon zekrom" src="reshiram.gif" alt="zekrom">
+  <div class="scene-layer" aria-hidden="true">
+    <div class="scene-wingulls">
+      <img class="wingull w1" src="https://i.imgur.com/briah0h.png" alt="">
+      <img class="wingull w2" src="https://i.imgur.com/briah0h.png" alt="">
+      <img class="wingull w3" src="https://i.imgur.com/briah0h.png" alt="">
+      <img class="wingull w4" src="https://i.imgur.com/briah0h.png" alt="">
+      <img class="wingull w5" src="https://i.imgur.com/briah0h.png" alt="">
+    </div>
 
-  <div id="splash">PRESS START</div>
+    <div class="scene-wishiwashi">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:6%;  top:62%; transform:rotate(8deg)  scale(.95);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:12%; top:40%; transform:rotate(-6deg) scale(.9);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:18%; top:70%; transform:rotate(4deg)  scale(.85);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:23%; top:52%; transform:rotate(-10deg) scale(.9);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:29%; top:76%; transform:rotate(6deg)  scale(.8);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:34%; top:58%; transform:rotate(-4deg) scale(.88);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:38%; top:36%; transform:rotate(10deg)  scale(.86);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:42%; top:72%; transform:rotate(-8deg) scale(.82);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:46%; top:54%; transform:rotate(5deg)  scale(.9);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:50%; top:80%; transform:rotate(-2deg) scale(.78);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:56%; top:66%; transform:rotate(7deg)  scale(.86);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:61%; top:44%; transform:rotate(-6deg) scale(.9);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:66%; top:74%; transform:rotate(3deg)  scale(.82);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:71%; top:58%; transform:rotate(-9deg) scale(.86);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:76%; top:78%; transform:rotate(8deg)  scale(.8);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:80%; top:40%; transform:rotate(12deg)  scale(.88);">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:85%; top:64%; transform:rotate(-4deg) scale(.86);">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:90%; top:48%; transform:rotate(6deg)  scale(.9);">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:94%; top:76%; transform:rotate(-7deg) scale(.78);">
 
-  <audio id="startSound" src="pokemon-start.mp3"></audio>
-  <audio id="bgMusic" src="moongirl.mp3" loop></audio>
-
-  <div id="main">
-    <div class="card">
-      <img class="profile" src="https://i.imgur.com/UbyLbw9.jpeg" alt="pfp">
-      <h1>dani</h1>
-      <p>
-        chronically online, pokemon enthusiast & currently taking cs + networking.<br>
-        I love my friends nat, enzo, andrew, mari, irwin, aariz, fuji, aldrin, steve, kael ♡
-      </p>
-
-      <div class="links">
-        <a href="https://www.tiktok.com/@dnca1600" target="_blank">
-          <img src="https://i.imgur.com/hTQmoU3.png" alt="TikTok">
-        </a>
-        <a href="https://pokemonshowdown.com/users/waitimsogoated" target="_blank">
-          <img src="https://i.imgur.com/COqXu8j.png" alt="Showdown">
-        </a>
-        <a href="https://www.roblox.com/users/2246596615/profile" target="_blank">
-          <img src="https://i.imgur.com/mw7x8uo.png" alt="Roblox">
-        </a>
-        <a href="https://open.spotify.com/user/315lttbowr4guh66yl5adv5ley7u" target="_blank">
-          <img src="https://i.imgur.com/oZkAFWR.png" alt="Spotify">
-        </a>
-      </div>
-
-      <div id="views">👀 views: 1006</div>
-
-      <a href="jblog.html" class="blog-link">blog</a>
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:8%;  top:88%; transform:rotate(4deg)  scale(.72); opacity:.75;">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:21%; top:92%; transform:rotate(-6deg) scale(.7);  opacity:.7;">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:36%; top:90%; transform:rotate(7deg)  scale(.74); opacity:.72;">
+      <img class="wishi b" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:58%; top:92%; transform:rotate(-4deg) scale(.7);  opacity:.7;">
+      <img class="wishi c" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:74%; top:89%; transform:rotate(6deg)  scale(.74); opacity:.72;">
+      <img class="wishi a" src="https://i.imgur.com/ACQqRWp.png" alt="" style="left:88%; top:93%; transform:rotate(-8deg) scale(.68); opacity:.68;">
     </div>
   </div>
 
-  <script>
-    const splash = document.getElementById('splash');
-    const main = document.getElementById('main');
-    const startSound = document.getElementById('startSound');
-    const bgMusic = document.getElementById('bgMusic');
+  <section class="trainer-card">
+    <div class="inner">
 
-    function fadeInAudio(audio, duration = 2000) {
-      audio.volume = 0;
-      audio.play();
-      const step = 0.05;
-      const intervalTime = duration / (1 / step);
-      const fadeInterval = setInterval(() => {
-        if (audio.volume < 1) audio.volume = Math.min(audio.volume + step, 1);
-        else clearInterval(fadeInterval);
-      }, intervalTime);
-    }
+      <div class="top">
+        <div class="motif-layer" aria-hidden="true">
+          <img class="motif palm motifpalm-2" src="https://i.imgur.com/q6sCXbw.png" alt="">
+          <img class="motif palm motifpalm-3" src="https://i.imgur.com/q6sCXbw.png" alt="">
+          <img class="motif palm motifpalm-4" src="https://i.imgur.com/q6sCXbw.png" alt="">
 
-    function startGame() {
-      startSound.play();
-      splash.classList.add('flip-up');
+          <img class="motif leaf motifleaf-1" src="https://i.imgur.com/gByUYAb.png" alt="">
+          <img class="motif leaf motifleaf-2" src="https://i.imgur.com/Ld6OlEL.png" alt="">
+          <img class="motif leaf motifleaf-3" src="https://i.imgur.com/gZY5BAO.png" alt="">
+        </div>
 
-      setTimeout(() => {
-        splash.style.display = 'none';
-        main.style.display = 'flex';
-        fadeInAudio(bgMusic, 3000);
-      }, 800);
+        <div class="grid">
+          <div class="portrait">
+            <img src="https://i.imgur.com/5wqltZB.jpeg" alt="portrait">
+          </div>
 
-      splash.removeEventListener('click', startGame);
-      document.removeEventListener('keydown', startGame);
-    }
+          <div>
+            <div class="stats">
+              <div class="row"><span class="label">Name</span><span class="value">Dani</span></div>
+              <div class="row"><span class="label">ID No.</span><span class="value">1006</span></div>
+              <div class="row"><span class="label">Region</span><span class="value">Kalos</span></div>
+              <div class="row"><span class="label">Pokédex</span><span class="value">Seen 872</span></div>
+              <div class="row"><span class="label">Money</span><span class="value">₽372</span></div>
+              <div class="row"><span class="label">Battle Points</span><span class="value">1500</span></div>
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
 
-    splash.addEventListener('click', startGame);
-    document.addEventListener('keydown', startGame);
-  </script>
+      <div class="bottom">
+        <div class="motif-layer" aria-hidden="true">
+          <img class="motif icon motificon-sunmoon" src="https://i.imgur.com/x0RVKp4.png" alt="">
+          <img class="motif icon motificon-burningshadows" src="https://i.imgur.com/OPuQF9s.png" alt="">
+        </div>
+
+        <div class="stats">
+          <div class="row"><span class="label">Play time</span><span class="value">1006:30</span></div>
+          <div class="row"><span class="label">Adventure started on</span><span class="value">11/13</span></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span class="btn">A</span>
+        <span>Portrait Photo</span>
+      </div>
+
+    </div>
+  </section>
 
 </body>
 </html>
